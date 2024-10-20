@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W4U Dashboard</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+</head>
+<body>
+        <img src="/images/logo1.png" alt="" class="logo" height="50px">
+
+
+    <div class="data">
+        <img src="<%= logoUrl %>" alt="" height="180px" class="icon">
+        <p class="temp"><%= temp %>°C</p>
+        <p class="desc"><%= desc %></p>
+        <div class="location">
+            <img src="/images/assets/location_on_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png" alt="" height="30px">
+            <p> <%= place %></p>
+        </div>
+        <div class="others" style="color: white;">
+            <div class="aqi" style="display: flex;">
+                <img src="/images/assets/aq_69dp_E8EAED_FILL0_wght400_GRAD0_opsz48.png" alt="" height="80px">
+                <div>
+                <p>Air Quality Index</p>    
+                <p> <span style="background-color:  rgb(0, 140, 215); padding: 2px 5px; border-radius: 50%;"><%= aqi %></span> <%= condition %></p>
+                
+                </div>
+            </div>
+            <div class="humi" style="display: flex;">
+                <img src="/images/assets/humidity_percentage_69dp_E8EAED_FILL0_wght400_GRAD0_opsz48.png" alt="" height="80px">
+                <div>
+                    <p>Humidity</p>    
+                    <p> <%= humi %> %</p>
+                </div>
+            </div>
+            <div class="wind" style="display: flex;">
+                <img src="/images/assets/wind_power_69dp_E8EAED_FILL0_wght400_GRAD0_opsz48.png" alt="" height="80px">
+                <div>
+                    <p>Wind Speed</p>
+                    <p> <%= wind %> m/s</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            powered by <span class="text" style="cursor: pointer;"><br><strong><a href="https://openweathermap.org/">OpenWeather</a></strong></span> | <span class="text"><strong><a href="https://opencagedata.com/">OpenCage</a></strong></span> | <span class="text"><strong><a href="https://www.geoapify.com/">Geoapify</a></strong></span><br>
+            Designed and Developed by <span class="text"><strong><a href="https://www.linkedin.com/in/jeganathb">JX718</a></strong></span>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+</body>
+</html>

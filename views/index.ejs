@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEATHER4U</title>
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* Basic styles for the input and suggestions */
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: rgb(0, 140, 215);
+        }
+
+        ::placeholder {
+            color: white;
+            opacity: 1;
+        }
+
+        .main {
+            margin: 0;
+            align-items: center;
+            position: relative;
+            height: 300px;
+        }
+
+        .box {
+            margin: 0;
+            position: absolute;
+            display: flex;
+            top: 20%;
+            left: 40%;
+        }
+
+        .logo {
+            height: 100px;
+            width: 250px;
+        }
+
+        .button {
+            top: 110%;
+            right: -48%;
+            padding: 14.5px;
+            position: absolute;
+            font-size: 20px;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            border: none;
+            background-color: rgb(1, 59, 98);
+            color: white;
+        }
+
+        #placeInput:focus,
+        #placeInput:focus {
+            outline: none;
+        }
+
+        #placeInput {
+            width: 400px;
+            padding: 10px;
+            border: 5px solid rgb(1, 59, 98);
+            height: 25.8px;
+            font-size: 18px;
+            border-radius: 4px;
+            top: 110%;
+            left: -40%;
+            background-color: rgb(0, 140, 215);
+            color: white;
+            backdrop-filter: blur(20px);
+            position: absolute;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+        }
+
+        #suggestions {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            width: 400px;
+            margin-top: 35px;
+            border-top: none;
+            top: 119%;
+            left: -38%;
+            /* border: 1px solid rgb(0, 136, 182); */
+            border-top: none;
+            max-height: 200px;
+            overflow-y: auto;
+            color: white;
+            background-color: rgb(1, 21, 45);
+            position: absolute;
+            z-index: 1000;
+            animation-duration: 1s;
+            transition: all;
+        }
+
+        #suggestions li {
+            padding: 10px;
+            transition: 1.5s;
+            cursor: pointer;
+        }
+
+        #suggestions li:hover {
+            border: 2px solid rgb(0, 136, 182);
+            height: 30px;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .f {
+            display: flex;
+            color: white;
+            position: relative;
+        }
+
+        .t {
+            position: relative;
+            left: 23%;
+            width: 90%;
+            top: -10px;
+        }
+
+        .ico1 {
+            width: 500px;
+            left: 70px;
+        }
+
+        .ico3 {
+            width: 500px;
+            left: 70px;
+        }
+
+        .ico2 {
+            position: relative;
+            right: -170px;
+            width: 500px;
+        }
+
+        .ico4 {
+            position: relative;
+            right: -170px;
+            width: 500px;
+        }
+
+        .x {
+            position: relative;
+            top: 62.3%;
+            right: -59%;
+            margin: 0;
+            height: 28px;
+            width: 20px;
+        }
+
+        .p {
+            position: relative;
+            height: 90px;
+            left: 20%;
+            border-radius: 50%;
+            border: 5px solid rgb(1, 59, 98);
+        }
+
+        .footer {
+            text-align: center;
+            position: relative;
+            top: 50px;
+            color: white;
+        }
+
+        .text {
+            color: rgb(1, 59, 98);
+        }
+
+        @media screen and (max-width:600px) {
+            .main {
+                height: 250px;
+            }
+
+            .container {
+                display: block;
+            }
+
+            .ico1 {
+                left: -50px;
+                width: 320px;
+                font-size: 14px;
+            }
+
+            .ico2 {
+                left: -50px;
+                width: 320px;
+                font-size: 14px;
+            }
+
+            .ico4 {
+                left: -50px;
+                width: 320px;
+                font-size: 14px;
+            }
+
+            .ico3 {
+                left: -50px;
+                width: 320px;
+                font-size: 14px;
+            }
+
+            .logo {
+                height: 100px;
+                width: 200px;
+                position: relative;
+                left: -85px;
+            }
+
+            #placeInput {
+                width: 230px;
+                left: -138px;
+            }
+
+            .button {
+                right: 15.5%;
+
+            }
+
+            .x {
+                right: -62%;
+                top: 178px;
+                backdrop-filter: blur(20px);
+                border-radius: 50%;
+            }
+
+            #suggestions {
+                left: -65%;
+                width: 250px;
+            }
+
+            .footer {
+                text-align: center;
+                padding-bottom: 40px;
+                left: -10px;
+            }
+
+            .p {
+                margin-top: 30px;
+            }
+            .t{
+                top: 20px;
+            }
+
+        }
+        a:link {
+    color:rgb(0, 78, 142);
+  }
+  
+  
+  a:visited {
+    color: rgb(0, 78, 142);
+  }
+  
+  
+  a:hover {
+    color: rgb(0, 78, 142);
+  }
+  
+  
+  a:active {
+    color: rgb(0, 78, 142);
+  }
+a:link {
+    text-decoration: none;
+  }
+  
+  a:visited {
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  a:active {
+    text-decoration: underline;
+  }
+    </style>
+</head>
+
+<body>
+    <form action="/weather" method="POST" id="box">
+        <div class="main">
+            <div class="box">
+                <div class="input">
+                    <img src="/images/logo1.png" class="logo" alt="logo.jpg">
+                    <input type="text" id="placeInput" placeholder="Type a place..." autocomplete="off" name="place"
+                        class="inputfield" />
+                    <ul id="suggestions"></ul>
+                    <button type="submit" class="button"> ➤ </button>
+                </div>
+            </div>
+            <img src="/images/assets/cancel_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png" alt="" class="x">
+        </div>
+
+    </form>
+
+    <div class="container">
+        <div class="ico1 f">
+            <img src="/images/assets/thermostat_69dp_E8EAED_FILL0_wght400_GRAD0_opsz48.png" alt="" class="p">
+            <p class="t">At Weather4U, we provide you with the current temperature to help you gauge the comfort level
+                in your location. Whether you're planning a day out or staying cozy indoors, knowing the temperature is
+                essential.</p>
+        </div>
+        <div class="ico2 f">
+            <img src="/images/assets/humidity_percentage_69dp_E8EAED_FILL0_wght400_GRAD0_opsz48.png" alt="" class="p">
+            <p class="t">The app displays current and forecasted humidity levels, helping users understand comfort
+                conditions and plan their activities effectively for both muggy and dry weather.</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="ico3 f">
+            <img src="/images/assets/aq_69dp_E8EAED_FILL0_wght400_GRAD0_opsz48.png" alt="" class="p">
+            <p class="t">
+                Weather4U provides real-time AQI data, enabling users to assess air quality quickly and make informed
+                decisions about outdoor activities, especially for those with health sensitivities.
+            <p>
+        </div>
+        <div class="ico4 f">
+            <img src="/images/assets/wind_power_69dp_E8EAED_FILL0_wght400_GRAD0_opsz48.png" alt="" class="p">
+            <p class="t">Weather4U includes detailed wind speed and direction information, essential for users engaging
+                in outdoor activities, allowing them to plan safely and enjoyably based on wind conditions.
+            </p>
+        </div>
+    </div>
+    <div class="footer">
+        powered by <span class="text" style="cursor: pointer;"><br><strong><a href="https://openweathermap.org/">OpenWeather</a></strong></span> | <span class="text"><strong><a href="https://opencagedata.com/">OpenCage</a></strong></span> | <span class="text"><strong><a href="https://www.geoapify.com/">Geoapify</a></strong></span><br>
+        Designed and Developed by <span class="text"><strong><a href="https://www.linkedin.com/in/jeganathb">JX718</a></strong></span>
+    </div>
+
+
+
+    <script>
+        $(document).ready(function () {
+            const inputField = $('#placeInput');
+            const clearButton = $('.x');
+            clearButton.hide();
+            $('#placeInput').on('input', function () {
+                const place = $(this).val();
+                if (place) {
+                    $.post('/auto', { place: place }, function (data) {
+                        $('#suggestions').empty(); // Clear previous suggestions
+                        data.forEach(function (item) {
+                            $('#suggestions').append(`<li>${item}</li>`); // Add new suggestions
+                        });
+                    });
+                } else {
+                    $('#suggestions').empty(); // Clear suggestions if input is empty
+                }
+            });
+
+            // Handle suggestion click
+            $(document).on('click', '#suggestions li', function () {
+                $('#placeInput').val($(this).text()); // Set input value to clicked suggestion
+                $('#suggestions').empty(); // Clear suggestions after selection
+                $("form").submit();
+                clearButton.hide();
+            });
+
+            // Close suggestions when clicking outside
+            $(document).on('click', function (e) {
+                if (!$(e.target).closest('#placeInput').length) {
+                    $('#suggestions').empty();
+                }
+            });
+            inputField.on('input focus', function () {
+                if ($(this).val()) {
+                    clearButton.show();
+                } else {
+                    clearButton.hide();
+                }
+            });
+
+            // Clear the input field when the clear button is clicked
+            clearButton.on('click', function () {
+                inputField.val('').focus();
+                $(this).hide();
+            });
+
+        });
+    </script>
+</body>
+
+</html>
